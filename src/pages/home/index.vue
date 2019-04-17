@@ -11,11 +11,13 @@
 
 <script>
   import HomeHeader from './header';
+  import HomeSlider from './slider';
 
   export default {
     name: 'Home',
     components: {
-      HomeHeader
+      HomeHeader,
+      HomeSlider
     }
 
   };
@@ -23,7 +25,8 @@
 
 <style lang="scss" scoped>
   @import '~assets/scss/mixins';
-  .home{
+
+  .home {
     overflow: hidden;
     width: 100%;
     height: 100%;
