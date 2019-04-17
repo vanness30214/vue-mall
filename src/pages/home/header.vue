@@ -1,5 +1,5 @@
 <template>
-  <me-navbar class="header" title="dasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssas">
+  <me-navbar class="header" title="ssk">
     <i class="iconfont icon-scan" slot="left"></i>
 <!--    <div slot="center">ssk</div>-->
     <i class="iconfont icon-msg" slot="right"></i>
@@ -21,7 +21,7 @@
   @import "~assets/scss/mixins";
   .header{
     &.mine-navbar{
-      background-color: $header-bgc-translucent;
+      background-color: transparent;
     }
     .iconfont{
       color: $icon-color-default;

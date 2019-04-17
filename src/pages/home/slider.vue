@@ -1,10 +1,14 @@
 <template>
-    <div>homeslider</div>
+    <me-slider></me-slider>
 </template>
 
 <script>
+  import MeSlider from 'base/slider';
   export default {
-    name: 'homeslider'
+    name: 'homeslider',
+    components: {
+      MeSlider
+    }
   };
 </script>
 
