@@ -6,29 +6,10 @@
 </template>
 
 <script>
-  import {swiper, swiperSlider} from 'vue-awesome-swiper';
+  import {swiper} from 'vue-awesome-swiper';
 
   export default {
     name: 'MeSlider',
-    data() {
-      return {
-        swiperOption: {
-          watchOverflow: true,
-          direction: this.direction,
-          autoplay: this.interval ? {
-            delay: this.interval,
-            disableOnInteraction: false
-          } : false,
-          slidesPerView: 1,
-          loop: this.data.length <= 1 ? false : this.loop,
-          pagination: {
-            el: this.pagination ? '.swiper-pagination' : null
-          }
-
-        }
-      };
-
-    },
     props: {
       direction: {
         type: String,
@@ -56,13 +37,32 @@
         default: true
       }
     },
+    data() {
+      return {
+        swiperOption: {
+          watchOverflow: true,
+          direction: this.direction,
+          autoplay: this.interval ? {
+            delay: this.interval,
+            disableOnInteraction: false
+          } : false,
+          slidesPerView: 1,
+          loop: this.loop,
+          pagination: {
+            el: this.pagination ? '.swiper-pagination' : null
+          }
+        }
+      };
+    },
     components: {
-      swiper,
-      swiperSlider
+      swiper
     }
   };
 </script>
 
 <style lang="scss" scoped>
-
+  .swiper-container{
+    width: 100%;
+    height: 100%;
+  }
 </style>
