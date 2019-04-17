@@ -10,15 +10,13 @@
   </div>
 </template>
 
-
 <script>
 
-   import CTabbar from 'components/tabbar';
-   export default {
+  import CTabbar from 'components/tabbar';
+  export default {
     name: 'App',
     components: {
-    	CTabbar
+      CTabbar
     }
   };
 </script>
-

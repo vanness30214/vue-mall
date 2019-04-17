@@ -31,6 +31,5 @@
   .router-link-active {
     color: $link-active-color;
   }
-	
 
 </style>
