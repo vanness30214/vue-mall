@@ -1,5 +1,5 @@
 <template>
-    <div class="mine-loading">
+    <div class="mine-loading" :class="{'mine-loading-inline' : inline}">
       <span class="mine-loading-indicator" v-if="indicator ==='on'">
         <slot><img src="./loading.gif" alt="loading"></slot>
       </span>
@@ -21,6 +21,10 @@
       text: {
         type: String,
         default: '加载中...'
+      },
+      inline: {
+        type: Boolean,
+        default: false
       }
     }
   };
@@ -33,6 +37,13 @@
     width: 100%;
     height: 100%;
     @include flex-center(column);
+    &-inline{
+      flex-direction: row;
+      .mine-loading-indicator ~.mine-loading-text{
+        margin-top: 0px;
+        margin-left: 6px;
+      }
+    }
   }
   .mine-loading-indicator ~.mine-loading-text{
     margin-top: 6px;

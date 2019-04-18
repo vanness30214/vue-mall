@@ -1,12 +1,12 @@
 <template>
   <div class="slider-wrapper">
-    <me-loading></me-loading>
+    <me-loading v-if="!sliders.length" ></me-loading>
        <me-slider
         :direction="direction"
         :loop="loop"
         :interval="interval"
         :pagination="pagination"
-        v-if="sliders"
+        v-else
       >
         <swiper-slide v-for="(item, index) in sliders" :key="index">
           <a :href="item.linkUrl" class="slider-link">
