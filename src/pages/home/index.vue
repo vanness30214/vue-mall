@@ -3,6 +3,7 @@
     <header class="g-header-container">
       <home-header></home-header>
     </header>
+    <me-scroll></me-scroll>
     <div>
       <home-slider></home-slider>
     </div>
@@ -14,12 +15,14 @@
 <script>
   import HomeHeader from './header';
   import HomeSlider from './slider';
+  import MeScroll from 'base/scroll';
 
   export default {
     name: 'Home',
     components: {
       HomeHeader,
-      HomeSlider
+      HomeSlider,
+      MeScroll
     }
 
   };
