@@ -1,17 +1,20 @@
 <template>
   <div class="slider-wrapper">
-      <me-slider
-      :direction="direction"
-      :loop="loop"
-      :interval="interval"
-      :pagination="pagination"
-    >
-      <swiper-slide v-for="(item, index) in sliders" :key="index">
-        <a :href="item.linkUrl" class="slider-link">
-          <img :src="item.picUrl" alt="" class="slider-img">
-        </a>
-      </swiper-slide>
-    </me-slider>
+    <me-loading></me-loading>
+       <me-slider
+        :direction="direction"
+        :loop="loop"
+        :interval="interval"
+        :pagination="pagination"
+        v-if="sliders"
+      >
+        <swiper-slide v-for="(item, index) in sliders" :key="index">
+          <a :href="item.linkUrl" class="slider-link">
+            <img :src="item.picUrl" alt="" class="slider-img">
+          </a>
+        </swiper-slide>
+      </me-slider>
+
   </div>
 </template>
 
@@ -19,6 +22,8 @@
   import MeSlider from 'base/slider';
   import {sliderOptions} from './config';
   import {swiperSlide} from 'vue-awesome-swiper';
+  import {getHomeSlider} from 'api/home';
+  import MeLoading from 'base/loading';
   export default {
     name: 'homeslider',
     data() {
@@ -27,29 +32,23 @@
         loop: sliderOptions.loop,
         interval: sliderOptions.interval,
         pagination: sliderOptions.pagination,
-        sliders: [
-          {
-            'linkUrl': 'http://www.baidu.com',
-            'picUrl': require('./1.jpg')
-          },
-          {
-            'linkUrl': 'http://www.baidu.com',
-            'picUrl': require('./2.jpg')
-          },
-          {
-            'linkUrl': 'http://www.baidu.com',
-            'picUrl': require('./3.jpg')
-          },
-          {
-            'linkUrl': 'http://www.baidu.com',
-            'picUrl': require('./4.jpg')
-          }
-        ]
+        sliders: []
       };
+    },
+    created() {
+      this.getSliders();
+    },
+    methods: {
+      getSliders() {
+        getHomeSlider().then(data => {
+          this.sliders = data;
+        });
+      }
     },
     components: {
       MeSlider,
-      swiperSlide
+      swiperSlide,
+      MeLoading
     }
   };
 </script>
