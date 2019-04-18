@@ -1,19 +1,19 @@
 <template>
-  <swiper :options="swiperOption">
-    <swiper-slider>
+  <swiper :options="swiperOption" ref='swiper'>
+    <swiper-slide>
       <slot></slot>
-    </swiper-slider>
+    </swiper-slide>
+    <div class="swiper-scrollbar" v-if="scrollbar" slot="scrollbar"></div>
   </swiper>
-  <div class="swiper-scrollbar" v-if="scrollbar" slot="scrollbar"></div>
 </template>
 
 <script>
-  import {swiper, swiperSlider} from 'vue-awesome-swiper';
+  import {swiper, swiperSlide} from 'vue-awesome-swiper';
   export default {
-    name: 'index',
+    name: 'MeScroll',
     components: {
       swiper,
-      swiperSlider
+      swiperSlide
     },
     props: {
       scrollbar: {
@@ -38,6 +38,14 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .swiper-container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  };
 
+  .swiper-slide {
+    height: auto;
+  }
 </style>
