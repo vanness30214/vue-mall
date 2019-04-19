@@ -3,7 +3,11 @@
     <header class="g-header-container">
       <home-header></home-header>
     </header>
-    <me-scroll :data="recommends">
+    <me-scroll
+      :data="recommends"
+      pullDown
+      @pull-down="pullToRefresh"
+    >
       <home-slider></home-slider>
       <home-nav></home-nav>
       <home-recommend @loaded="getRecommends"></home-recommend>
@@ -40,6 +44,12 @@
       },
       getRecommends(recommends) {
         this.recommends = recommends;
+      },
+      pullToRefresh(end) {
+        setTimeout(() => {
+          end();
+          console.log('xiala');
+        }, 1000);
       }
     }
   };

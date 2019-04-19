@@ -3,7 +3,7 @@
       <span class="mine-loading-indicator" v-if="indicator ==='on'">
         <slot><img src="./loading.gif" alt="loading"></slot>
       </span>
-      <span class="mine-loading-text" v-if="text">{{text}}</span>
+      <span class="mine-loading-text" v-if="loadingText">{{loadingText}}</span>
     </div>
 </template>
 
@@ -25,6 +25,21 @@
       inline: {
         type: Boolean,
         default: false
+      }
+    },
+    data() {
+      return {
+        loadingText: this.text
+      };
+    },
+    watch: {
+      text(text) {
+        this.loadingText = text;
+      }
+    },
+    methods: {
+      setText(text) {
+        this.loadingText = text;
       }
     }
   };
