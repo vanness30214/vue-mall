@@ -1,5 +1,4 @@
 @import "mixins";
-
 .g-container {
   overflow: hidden;
   position: relative;
@@ -14,7 +13,6 @@
   height: 100%;
   padding-bottom: $tabbar-height;
 }
-
 .g-header-container {
   position: absolute;
   left: 0;
@@ -32,9 +30,12 @@
   box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6);
 }
 
+
 .g-backtop-container {
   position: absolute;
   z-index: $backtop-z-index;
   right: 10px;
   bottom: $tabbar-height + 10px;
 }
+
+

@@ -1,35 +1,59 @@
 import axios from 'axios';
-import {TIME_OUT, SUCC_CODE} from 'api/config';
 import jsonp from 'assets/js/jsonp';
+import {SUCC_CODE, TIMEOUT, HOME_RECOMMEND_PAGE_SIZE, jsonpOptions} from './config';
 
-// 获取swpier数据
-export const getHomeSlider = () => {
-  return axios.get('https://www.imooc.com/api/home/slider', {timeout: TIME_OUT}).then(res => {
-    // console.log(res.data.slider);
-    if (res.data.code === SUCC_CODE) {
-      return res.data.slider;
+// 打乱数组顺序
+const shuffle = (arr) => {
+  const arrLength = arr.length;
+  let i = arrLength;
+  let rndNum;
+
+  while (i--) {
+    if (i !== (rndNum = Math.floor(Math.random() * arrLength))) {
+      [arr[i], arr[rndNum]] = [arr[rndNum], arr[i]];
     }
-    throw new Error('没有成功获取数据');
+  }
+
+  return arr;
+};
+
+// 获取幻灯片数据--ajax
+export const getHomeSlider = () => {
+  return axios.get('http://www.imooc.com/api/home/slider', {
+    timeout: TIMEOUT
+  }).then(res => {
+    if (res.data.code === SUCC_CODE) {
+      let sliders = res.data.slider;
+      const slider = [sliders[Math.floor(Math.random() * sliders.length)]];
+      sliders = shuffle(sliders.filter(() => Math.random() >= 0.5));
+      if (sliders.length === 0) {
+        sliders = slider;
+      }
+      return sliders;
+    }
+    throw new Error('没有成功获取到数据！');
   }).catch(err => {
     if (err) {
       console.log(err);
     }
+
     return [
       {
-        linkUrl: 'www.baidu.com',
+        linkUrl: 'https://www.imooc.com',
         picUrl: require('assets/img/404.png')
       }
     ];
-  }).then(data => {
+  }).then(res => {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve(data);
+        resolve(res);
       }, 1000);
     });
   });
 };
 
-export const getHomeRecommend = (page = 1, psize = 20) => {
+// 获取热门推荐数据--jsonp
+export const getHomeRecommend = (page = 1, psize = HOME_RECOMMEND_PAGE_SIZE) => {
   const url = 'https://ju.taobao.com/json/tg/ajaxGetItemsV2.json';
   const params = {
     page,
@@ -37,9 +61,22 @@ export const getHomeRecommend = (page = 1, psize = 20) => {
     type: 0,
     frontCatId: ''
   };
-  return jsonp(url, params, {
-    params: 'callback'
+
+  return jsonp(url, params, jsonpOptions).then(res => {
+    if (res.code === '200') {
+      return res;
+    }
+
+    throw new Error('没有成功获取到数据！');
+  }).catch(err => {
+    if (err) {
+      console.log(err);
+    }
   }).then(res => {
-    console.log(res);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(res);
+      }, 1000);
+    });
   });
 };

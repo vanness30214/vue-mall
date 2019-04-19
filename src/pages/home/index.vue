@@ -6,7 +6,7 @@
     <me-scroll>
       <home-slider></home-slider>
       <home-nav></home-nav>
-      <HomeRecommend></HomeRecommend>
+      <home-recommend></home-recommend>
     </me-scroll>
     <div class="g-backtop-container"></div>
     <router-view></router-view>
