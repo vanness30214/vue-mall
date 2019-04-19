@@ -18,10 +18,8 @@
   import {navItems} from './config';
   export default {
     name: 'HomeNav',
-    data() {
-      return {
-        navs: []
-      };
+    created() {
+      this.navs = navItems;
     }
   };
 </script>

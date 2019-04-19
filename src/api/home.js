@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {TIME_OUT, SUCC_CODE} from 'api/config';
+import jsonp from 'assets/js/jsonp';
 
 // 获取swpier数据
 export const getHomeSlider = () => {
@@ -25,5 +26,20 @@ export const getHomeSlider = () => {
         resolve(data);
       }, 1000);
     });
+  });
+};
+
+export const getHomeRecommend = (page = 1, psize = 20) => {
+  const url = 'https://ju.taobao.com/json/tg/ajaxGetItemsV2.json';
+  const params = {
+    page,
+    psize,
+    type: 0,
+    frontCatId: ''
+  };
+  return jsonp(url, params, {
+    params: 'callback'
+  }).then(res => {
+    console.log(res);
   });
 };
