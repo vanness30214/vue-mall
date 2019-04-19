@@ -5,7 +5,7 @@ import Router from 'vue-router';
 // import Cart from 'pages/cart';
 // import Personal from 'pages/personal';
 // import Search from 'pages/search';
-import Product from 'pages/product';
+// import Product from 'pages/product';
 
 Vue.use(Router);
 

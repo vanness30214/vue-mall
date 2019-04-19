@@ -25,6 +25,9 @@
       </li>
     </ul>
   </div>
+  <!-- <div>
+    HomeRecommend
+  </div> -->
 </template>
 
 <script>
@@ -44,9 +47,11 @@
       };
     },
     created() {
+      // getHomeRecommend(1);
       this.getRecommend();
     },
     methods: {
+      // API
       update() {
         return this.getRecommend();
       },

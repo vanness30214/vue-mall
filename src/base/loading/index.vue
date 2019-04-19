@@ -1,10 +1,10 @@
 <template>
-    <div class="mine-loading" :class="{'mine-loading-inline' : inline}">
-      <span class="mine-loading-indicator" v-if="indicator ==='on'">
-        <slot><img src="./loading.gif" alt="loading"></slot>
-      </span>
-      <span class="mine-loading-text" v-if="loadingText">{{loadingText}}</span>
-    </div>
+  <div class="mine-loading" :class="{'mine-loading-inline': inline}">
+    <span class="mine-loading-indicator" v-if="indicator==='on'">
+      <slot><img src="./loading.gif" alt="loading"></slot>
+    </span>
+    <span class="mine-loading-text" v-if="loadingText">{{loadingText}}</span>
+  </div>
 </template>
 
 <script>
@@ -38,29 +38,47 @@
       }
     },
     methods: {
+      // setText(text = this.text) {
+      //   this.loadingText = text;
+      // }
       setText(text) {
         this.loadingText = text;
       }
     }
+    // watch: {
+    //   text(text) {
+    //     this.loadingText = text;
+    //   }
+    // },
+    // methods: {
+    //   setText(text = this.text) {
+    //     this.loadingText = text;
+    //   }
+    // }
   };
 </script>
 
 <style lang="scss" scoped>
   @import "~assets/scss/mixins";
-  .mine-loading{
+
+  .mine-loading {
     overflow: hidden;
     width: 100%;
     height: 100%;
     @include flex-center(column);
-    &-inline{
+
+    &.mine-loading-inline {
       flex-direction: row;
-      .mine-loading-indicator ~.mine-loading-text{
-        margin-top: 0px;
+
+      .mine-loading-indicator ~ .mine-loading-text {
+        margin-top: 0;
         margin-left: 6px;
       }
     }
   }
-  .mine-loading-indicator ~.mine-loading-text{
+
+  .mine-loading-indicator ~ .mine-loading-text {
     margin-top: 6px;
   }
+
 </style>

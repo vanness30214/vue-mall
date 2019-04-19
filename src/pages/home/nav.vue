@@ -16,34 +16,98 @@
 
 <script>
   import {navItems} from './config';
+
   export default {
     name: 'HomeNav',
+    // data() {
+    // return {
+    // navs: navItems
+    // 放到config.js中
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-1.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-2.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-3.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-4.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-5.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-6.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-7.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-8.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-9.png'),
+    // text: '拍卖'
+    // },
+    // {
+    // linkUrl: 'https://www.imooc.com',
+    // picUrl: require('./img/nav-item-10.png'),
+    // text: '拍卖'
+    // }
+    // };
+    // },
     created() {
       this.navs = navItems;
+      // console.log(this);
     }
   };
 </script>
 
 <style lang="scss" scoped>
   @import "~assets/scss/mixins";
-  .nav{
+
+  .nav {
     width: 100%;
     padding-top: 15px;
     background-color: #fff;
-    &-list{
+
+    &-list {
       display: flex;
       flex-wrap: wrap;
     }
-    &-item{
+
+    &-item {
       width: 20%;
       margin-bottom: 15px;
     }
-    &-link{
+
+    &-link {
       @include flex-center(column);
     }
-    &-pic{
+
+    &-pic {
       width: 60%;
       margin-bottom: 8px;
     }
   }
+
 </style>

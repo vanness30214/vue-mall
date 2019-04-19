@@ -1,7 +1,7 @@
 <template>
-  <div class="product">
-    product
-  </div>
+    <div class="product">
+      product
+    </div>
 </template>
 
 <script>
@@ -11,8 +11,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/mixins";
-  .product {
+ @import "~assets/scss/mixins";
+ .product {
     overflow: hidden;
     position: absolute;
     top: 0;

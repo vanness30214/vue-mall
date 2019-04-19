@@ -1,4 +1,4 @@
-<template >
+<template>
   <div id="app" class="g-container">
     <div class="g-view-container">
       <router-view></router-view>
@@ -9,7 +9,6 @@
 
   </div>
 </template>
-
 <script>
 
   import CTabbar from 'components/tabbar';

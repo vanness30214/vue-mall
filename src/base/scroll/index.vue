@@ -1,16 +1,22 @@
 <template>
   <swiper :options="swiperOption" ref='swiper'>
+    <!-- 下拉 -->
     <div class="mine-scroll-pull-down" v-if="pullDown">
-      <me-loading :text="pillDownText" inline ref="pullDownLoading"></me-loading>
+      <me-loading :text="pullDownText" inline ref="pullDownLoading"/>
     </div>
     <swiper-slide>
       <slot></slot>
     </swiper-slide>
+    <!-- 上拉 -->
+    <div class="mine-scroll-pull-up" v-if="pullUp">
+      <me-loading :text="pullUpText" inline ref="pullUpLoading"/>
+    </div>
     <div class="swiper-scrollbar" v-if="scrollbar" slot="scrollbar"></div>
   </swiper>
 </template>
 
 <script>
+
   import {swiper, swiperSlide} from 'vue-awesome-swiper';
   import MeLoading from 'base/loading';
   import {
@@ -19,18 +25,20 @@
     PULL_DOWN_TEXT_START,
     PULL_DOWN_TEXT_ING,
     PULL_DOWN_TEXT_END,
+    PULL_UP_HEIGHT,
     PULL_UP_TEXT_INIT,
     PULL_UP_TEXT_START,
-    PULL_UP_HEIGHT,
     PULL_UP_TEXT_ING,
     PULL_UP_TEXT_END
   } from './config';
+
   export default {
     name: 'MeScroll',
     components: {
       swiper,
       swiperSlide,
       MeLoading
+
     },
     props: {
       scrollbar: {
@@ -43,13 +51,54 @@
       pullDown: {
         type: Boolean,
         default: false
+      },
+      pullUp: {
+        type: Boolean,
+        default: false
       }
     },
-    data() {
-      return {
-        pulling: false,
-        pillDownText: PULL_DOWN_TEXT_INIT,
-        swiperOption: {
+    // data() {
+    //   return { // 下拉参数设置
+    //     pulling: false,
+    //     pullDownText: PULL_DOWN_TEXT_INIT,
+    //     pullUpText: PULL_DOWN_TEXT_INIT,//没有
+    //     swiperOption: {
+    //       direction: 'vertical',
+    //       slidesPerView: 'auto',
+    //       freeMode: true,
+    //       setWrapperSize: true,
+    //       scrollbar: {
+    //         el: this.scrollbar ? '.swiper-scrollbar' : null,
+    //         hide: true
+    //       },
+    //       on: {
+    //         sliderMove: this.scroll,
+    //         touchEnd: this.touchEnd,
+    //         // transitionEnd: this.scrollEnd
+    //       }
+    //     }
+    //   };
+    // },
+    watch: {
+      data() {
+        this.update();
+      }
+    },
+    created() {
+      this.init();
+    },
+    methods: {
+      update() {
+        this.$refs.swiper && this.$refs.swiper.swiper.update();
+      },
+      scrollToTop(speed, runCallbacks) {
+        this.$refs.swiper && this.$refs.swiper.swiper.slideTo(0, speed, runCallbacks);
+      },
+      init() {
+        this.pulling = false;
+        this.pullDownText = PULL_DOWN_TEXT_INIT;
+        this.pullUpText = PULL_DOWN_TEXT_INIT;// 没有
+        this.swiperOption = {
           direction: 'vertical',
           slidesPerView: 'auto',
           freeMode: true,
@@ -60,24 +109,23 @@
           },
           on: {
             sliderMove: this.scroll,
-            touchEnd: this.touchEnd
+            touchEnd: this.touchEnd,
+            transitionEnd: this.scrollEnd // 向上滑动时监听scrollEnd
           }
-        }
-      };
-    },
-    watch: {
-      data() {
-        this.update();
-      }
-    },
-    methods: {
-      update() {
-        this.$refs.swiper && this.$refs.swiper.swiper.update();
+        };
       },
 
       scroll() {
         const swiper = this.$refs.swiper.swiper;
-        if (swiper.translate > 0) {
+        // 监控什么时候出现回到顶部
+
+        this.$emit('scroll', swiper.translate, this.$refs.swiper.swiper);
+
+        if (this.pulling) {
+          return;
+        }
+        console.log(swiper.translate);
+        if (swiper.translate > 0) { // 下拉
           if (!this.pullDown) {
             return;
           }
@@ -86,7 +134,24 @@
           } else {
             this.$refs.pullDownLoading.setText(PULL_DOWN_TEXT_INIT);
           }
+        } else if (swiper.isEnd) { // 上拉
+          if (!this.pullUp) {
+            return;
+          }
+
+          const isPullUp = Math.abs(swiper.translate) + swiper.height - PULL_UP_HEIGHT > parseInt(swiper.$wrapperEl.css('height'));
+
+          if (isPullUp) {
+            this.$refs.pullUpLoading.setText(PULL_UP_TEXT_START);
+          } else {
+            this.$refs.pullUpLoading.setText(PULL_UP_TEXT_INIT);
+          }
         }
+      },
+      scrollEnd() {
+        const swiper = this.$refs.swiper.swiper;
+
+        this.$emit('scroll-end', swiper.translate, swiper, this.pulling);
       },
       touchEnd() {
         if (this.pulling) {
@@ -145,7 +210,6 @@
     }
   };
 </script>
-
 <style lang="scss" scoped>
   .swiper-container {
     overflow: hidden;
@@ -156,11 +220,19 @@
   .swiper-slide {
     height: auto;
   }
-  .mine-scroll-pull-down{
+  .mine-scroll-pull-up,
+  .mine-scroll-pull-down {
     position: absolute;
     left: 0;
-    bottom: 100%;
     width: 100%;
+  }
+  .mine-scroll-pull-down {
+    bottom: 100%;
     height: 80px;
+  }
+
+  .mine-scroll-pull-up {
+    top: 100%;
+    height: 30px;
   }
 </style>
