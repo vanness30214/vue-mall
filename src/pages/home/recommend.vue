@@ -44,7 +44,6 @@
       };
     },
     created() {
-
       this.getRecommend();
     },
     methods: {

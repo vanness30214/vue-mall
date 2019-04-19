@@ -2,7 +2,7 @@ import axios from 'axios';
 import jsonp from 'assets/js/jsonp';
 import {SUCC_CODE, TIMEOUT, HOME_RECOMMEND_PAGE_SIZE, jsonpOptions} from './config';
 
-// 打乱数组顺序
+
 const shuffle = (arr) => {
   const arrLength = arr.length;
   let i = arrLength;
@@ -39,7 +39,7 @@ export const getHomeSlider = () => {
 
     return [
       {
-        linkUrl: 'https://www.imooc.com',
+        linkUrl: 'https://www.baidu.com',
         picUrl: require('assets/img/404.png')
       }
     ];

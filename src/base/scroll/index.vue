@@ -19,6 +19,9 @@
       scrollbar: {
         type: Boolean,
         default: true
+      },
+      data: {
+        type: [Array, Object]
       }
     },
     data() {
@@ -34,6 +37,16 @@
           }
         }
       };
+    },
+    watch: {
+      data() {
+        this.update();
+      }
+    },
+    methods: {
+      update() {
+        this.$refs.swiper && this.$refs.swiper.swiper.update();
+      }
     }
   };
 </script>
