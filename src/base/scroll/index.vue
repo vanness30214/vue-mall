@@ -124,7 +124,6 @@
         if (this.pulling) {
           return;
         }
-        console.log(swiper.translate);
         if (swiper.translate > 0) { // 下拉
           if (!this.pullDown) {
             return;
