@@ -1,16 +1,49 @@
 <template>
   <div class="category">
-    category
+    <header class="g-header-container">
+      <category-header/>
+    </header>
+    <div class="g-content-container">
+      <div class="sidebar"></div>
+      <div class="main"></div>
+    </div>
   </div>
 </template>
 
 <script>
+  import CategoryHeader from './header';
+  import CategoryTab from './tab';
+  import CategoryContent from './content';
 
   export default {
-    name: 'category'
+    name: 'Category',
+    components: {
+      CategoryHeader,
+      CategoryTab,
+      CategoryContent
+    }
   };
 </script>
 
 <style lang="scss" scoped>
+  @import "~assets/scss/mixins";
 
+  .category {
+    overflow:hidden;
+    width:100%;
+    height:100%;
+    background-color: $bgc-theme;
+  }
+
+  .g-content-container {
+    display: flex;
+  }
+  .sidebar {
+    width: 80px;
+    height: 100%;
+  }
+  .main {
+    flex: 1;
+    height: 100%;
+  }
 </style>
