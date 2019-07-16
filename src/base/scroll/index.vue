@@ -89,7 +89,9 @@
     },
     methods: {
       update() {
-        this.$refs.swiper && this.$refs.swiper.swiper.update();
+        this.$nextTick(() => {
+          this.$refs.swiper && this.$refs.swiper.swiper.update();
+        });
       },
       scrollToTop(speed, runCallbacks) {
         this.$refs.swiper && this.$refs.swiper.swiper.slideTo(0, speed, runCallbacks);
@@ -124,6 +126,7 @@
         if (this.pulling) {
           return;
         }
+        // console.log(swiper.translate);
         if (swiper.translate > 0) { // 下拉
           if (!this.pullDown) {
             return;
@@ -219,6 +222,7 @@
   .swiper-slide {
     height: auto;
   }
+
   .mine-scroll-pull-up,
   .mine-scroll-pull-down {
     position: absolute;

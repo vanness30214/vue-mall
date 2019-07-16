@@ -13,6 +13,11 @@
   height: 100%;
   padding-bottom: $tabbar-height;
 }
+.g-content-container {
+  height: 100%;
+  padding-top: $navbar-height;
+}
+
 .g-header-container {
   position: absolute;
   left: 0;

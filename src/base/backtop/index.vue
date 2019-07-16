@@ -1,15 +1,15 @@
 <template>
   <transition name="mine-backtop">
     <a
-      href=""
+      href="javascript:;"
       class="mine-backtop"
       v-show="visible"
-      @click="backToTop" >
+      @click="backToTop"
+    >
       <i class="iconfont icon-backtop"></i>
     </a>
   </transition>
 </template>
-
 <script>
   export default {
     name: 'MeBacktop',
