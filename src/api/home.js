@@ -39,7 +39,7 @@ export const getHomeSlider = () => {
 
     return [
       {
-        linkUrl: 'https://www.imooc.com',
+        linkUrl: 'https://www.baidu.com',
         picUrl: require('assets/img/404.png')
       }
     ];

@@ -43,21 +43,6 @@
         interval: sliderOptions.interval,
         pagination: sliderOptions.pagination,
         sliders: []
-        // {
-        //  'linkUrl':'https://www.imooc.com',
-        //  'picUrl':require('./1.jpg')
-        // },
-        // {
-        //  'linkUrl':'https://www.imooc.com',
-        //  'picUrl':require('./2.jpg')
-        // },
-        // {
-        //  'linkUrl':'https://www.imooc.com',
-        //  'picUrl':require('./3.jpg')
-        // },{
-        //  'linkUrl':'https://www.imooc.com',
-        //  'picUrl':require('./4.jpg')
-        // }
       };
     },
     created() {
